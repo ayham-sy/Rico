@@ -1960,48 +1960,7 @@ $(".posts-random").each(function() {
     });
 });
 
-function radialTimer() {
-    var e = this;
-    this.seconds = 0, this.count = 0, this.degrees = 0, this.timerHTML = "<div class='clom radialtimer'><div class='n'></div><div class='slice'><div class='q'></div><div class='pie r'></div><div class='pie l'></div></div></div><div class='clom radialbtn'><a class='areload' data-href='false' id='btn_reload'>" + redirect_T_Configure + "</a></div>", this.interval = null, this.timerContainer = null, this.number = null, this.slice = null, this.pie = null, this.pieRight = null, this.pieLeft = null, this.quarter = null, this.reload = null, this.history = "/p/" + page_redirect + ".html", this.ranQuerydata = function() {
-        var t = e.getQueryVariable("url");
-        e.reload.attr("data-href", t)
-    }, this.ranQuerybtn = function() {
-        "false" == e.reload.attr("data-href") ? (e.reload.attr("href", "javascript:void(0)"), e.reload.html(redirect_T_err), e.reload.addClass("disabled")) : (e.reload.attr("href", e.reload.attr("data-href")), e.reload.html(redirect_T_ready), e.reload.addClass("active")), nobuttonn && "false" !== e.reload.attr("data-href") && window.location.replace(e.reload.attr("data-href"))
-    }, this.getQueryVariable = function(e) {
-        for (var t = window.location.search.substring(1).split("&"), i = 0; i < t.length; i++) {
-            var r = t[i].split("=");
-            if (r[0] == e) return r[1]
-        }
-        return !1
-    }, this.init = function(t, i) {
-        e.timerContainer = $("#" + t), e.timerContainer.html(e.timerHTML), e.number = e.timerContainer.find(".n"), e.slice = e.timerContainer.find(".slice"), e.pie = e.timerContainer.find(".pie"), e.pieRight = e.timerContainer.find(".pie.r"), e.pieLeft = e.timerContainer.find(".pie.l"), e.quarter = e.timerContainer.find(".q"), e.reload = e.timerContainer.find(".areload"), e.start(i), e.ranQuerydata(), e.timerContainer.length && history.pushState(null, "", e.history)
-    }, this.start = function(t) {
-        e.seconds = t, e.interval = window.setInterval(function() {
-            e.number.html(e.seconds - 1 - e.count), e.count++, e.count > e.seconds - 1 && clearInterval(e.interval), e.degrees += 360 / e.seconds, e.count >= e.seconds / 2 ? (e.slice.addClass("nc"), e.slice.hasClass("mth") || e.pieRight.css({
-                transform: "rotate(180deg)"
-            }), e.pieLeft.css({
-                transform: "rotate(" + e.degrees + "deg)"
-            }), e.slice.addClass("mth"), e.count >= .75 * e.seconds - 1 && e.quarter.remove(), e.seconds - 1 == e.count && e.ranQuerybtn()) : e.pie.css({
-                transform: "rotate(" + e.degrees + "deg)"
-            })
-        }, 1e3)
-    }
-}
-var page_redirect = void 0 !== Settingsredirect.pageName ? Settingsredirect.pageName : "redirect",
-    redirect_T_Configure = void 0 !== Settingsredirect.waitingMessage ? Settingsredirect.waitingMessage : "‏جاري تهيئة الرابط",
-    redirect_T_ready = void 0 !== Settingsredirect.linkReady ? Settingsredirect.linkReady : "الرابط جاهز",
-    redirect_T_err = void 0 !== Settingsredirect.linkError ? Settingsredirect.linkError : "رابط معطل",
-    redirect_timer = void 0 !== Settingsredirect.waitingTimer ? Settingsredirect.waitingTimer : "10",
-    redirect_match = void 0 !== Settingsredirect.autoRedirectSites ? Settingsredirect.autoRedirectSites : "#",
-    nobuttonn = void 0 !== Settingsredirect.nobuttonn && Settingsredirect.nobuttonn;
-$(document).ready(function() {
-    (new radialTimer).init("pageredirect", redirect_timer)
-}), $(".post-body a").each(function() {
-    var e = window.location.origin,
-        t = window.location.hostname,
-        i = new RegExp("(" + redirect_match + "|" + t + "|blogger.com|bp.blogspot.com|whatsapp:)");
-    0 <= this.href.match(i) && 0 <= this.name.match("more") && ($(this).attr("href", e + "/p/" + page_redirect + ".html?&url=" + $(this).attr("href")), $(this).attr("target", "_blank"))
-});
+
 window.addEventListener("scroll", function() {
     noThumbnail = "" + DefaultPostImage, $(".post-nav").each(function() {
         var e = $("a.prev-post").attr("href"),
@@ -2057,4 +2016,47 @@ $(function() {
     $(".table-of-contents .toggled").on("click", function() {
         $(".table-of-contents").toggleClass("rico-open");
     });
+});
+
+function radialTimer() {
+    var e = this;
+    this.seconds = 0, this.count = 0, this.degrees = 0, this.timerHTML = "<div class='clom radialtimer'><div class='n'></div><div class='slice'><div class='q'></div><div class='pie r'></div><div class='pie l'></div></div></div><div class='clom radialbtn'><a class='areload' data-href='false' id='btn_reload'>" + redirect_T_Configure + "</a></div>", this.interval = null, this.timerContainer = null, this.number = null, this.slice = null, this.pie = null, this.pieRight = null, this.pieLeft = null, this.quarter = null, this.reload = null, this.history = "/p/" + page_redirect + ".html", this.ranQuerydata = function() {
+        var t = e.getQueryVariable("url");
+        e.reload.attr("data-href", t)
+    }, this.ranQuerybtn = function() {
+        "false" == e.reload.attr("data-href") ? (e.reload.attr("href", "javascript:void(0)"), e.reload.html(redirect_T_err), e.reload.addClass("disabled")) : (e.reload.attr("href", e.reload.attr("data-href")), e.reload.html(redirect_T_ready), e.reload.addClass("active")), nobuttonn && "false" !== e.reload.attr("data-href") && window.location.replace(e.reload.attr("data-href"))
+    }, this.getQueryVariable = function(e) {
+        for (var t = window.location.search.substring(1).split("&"), i = 0; i < t.length; i++) {
+            var r = t[i].split("=");
+            if (r[0] == e) return r[1]
+        }
+        return !1
+    }, this.init = function(t, i) {
+        e.timerContainer = $("#" + t), e.timerContainer.html(e.timerHTML), e.number = e.timerContainer.find(".n"), e.slice = e.timerContainer.find(".slice"), e.pie = e.timerContainer.find(".pie"), e.pieRight = e.timerContainer.find(".pie.r"), e.pieLeft = e.timerContainer.find(".pie.l"), e.quarter = e.timerContainer.find(".q"), e.reload = e.timerContainer.find(".areload"), e.start(i), e.ranQuerydata(), e.timerContainer.length && history.pushState(null, "", e.history)
+    }, this.start = function(t) {
+        e.seconds = t, e.interval = window.setInterval(function() {
+            e.number.html(e.seconds - 1 - e.count), e.count++, e.count > e.seconds - 1 && clearInterval(e.interval), e.degrees += 360 / e.seconds, e.count >= e.seconds / 2 ? (e.slice.addClass("nc"), e.slice.hasClass("mth") || e.pieRight.css({
+                transform: "rotate(180deg)"
+            }), e.pieLeft.css({
+                transform: "rotate(" + e.degrees + "deg)"
+            }), e.slice.addClass("mth"), e.count >= .75 * e.seconds - 1 && e.quarter.remove(), e.seconds - 1 == e.count && e.ranQuerybtn()) : e.pie.css({
+                transform: "rotate(" + e.degrees + "deg)"
+            })
+        }, 1e3)
+    }
+}
+var page_redirect = void 0 !== Settingsredirect.pageName ? Settingsredirect.pageName : "redirect",
+    redirect_T_Configure = void 0 !== Settingsredirect.waitingMessage ? Settingsredirect.waitingMessage : "‏جاري تهيئة الرابط",
+    redirect_T_ready = void 0 !== Settingsredirect.linkReady ? Settingsredirect.linkReady : "الرابط جاهز",
+    redirect_T_err = void 0 !== Settingsredirect.linkError ? Settingsredirect.linkError : "رابط معطل",
+    redirect_timer = void 0 !== Settingsredirect.waitingTimer ? Settingsredirect.waitingTimer : "10",
+    redirect_match = void 0 !== Settingsredirect.autoRedirectSites ? Settingsredirect.autoRedirectSites : "#",
+    nobuttonn = void 0 !== Settingsredirect.nobuttonn && Settingsredirect.nobuttonn;
+$(document).ready(function() {
+    (new radialTimer).init("pageredirect", redirect_timer)
+}), $(".post-body a").each(function() {
+    var e = window.location.origin,
+        t = window.location.hostname,
+        i = new RegExp("(" + redirect_match + "|" + t + "|blogger.com|bp.blogspot.com|whatsapp:)");
+    0 <= this.href.match(i) && 0 <= this.name.match("more") && ($(this).attr("href", e + "/p/" + page_redirect + ".html?&url=" + $(this).attr("href")), $(this).attr("target", "_blank"))
 });
